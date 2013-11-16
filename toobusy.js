@@ -6,10 +6,10 @@ var STANDARD_MAX_VIOLATIONS = 0;
 // decayFactor is a dampening factor.  When determining average calls per second or
 // current lag, we weigh the current value against the previous value using this factor to smooth spikes
 
-var lastTime = new Date().valueOf(), now, lag, highWater = STANDARD_HIGHWATER, interval = STANDARD_INTERVAL, decayFactor = STANDARD_DECAY_FACTOR, maxViolations = STANDARD_MAX_VIOLATIONS, numViolations = 0, currentLag = 0;
+var lastTime = Date.now(), now, lag, highWater = STANDARD_HIGHWATER, interval = STANDARD_INTERVAL, decayFactor = STANDARD_DECAY_FACTOR, maxViolations = STANDARD_MAX_VIOLATIONS, numViolations = 0, currentLag = 0;
 
 var checkInterval = setInterval(function(){
-  now = new Date().valueOf();
+  now = Date.now();
   lag = now - lastTime;
   lag = (lag < interval) ? 0 : lag - interval;
   currentLag = (lag + (currentLag * (decayFactor - 1))) / decayFactor;
